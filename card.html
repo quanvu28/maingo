@@ -163,7 +163,7 @@
   </head>
   <body>
     <div class="video-container">
-      <video autoplay muted loop>
+      <video id="bg-video" autoplay muted loop playsinline>
         <source src="back.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -215,9 +215,18 @@
         if (able !== "true") {
           window.location.href = "index.html";
         }
+
+        // Ensure video plays
+        const video = document.getElementById("bg-video");
+        video.play().catch((error) => {
+          console.log("Video autoplay blocked:", error);
+        });
+
+        document.addEventListener("click", () => {
+          video.play();
+        });
       });
-    </script>
-    <script>
+
       document.addEventListener("DOMContentLoaded", () => {
         const audio = document.getElementById("bg-music");
 
@@ -228,10 +237,10 @@
           });
         };
 
-        playAudio(); // Try to play immediately
+        playAudio();
 
         document.addEventListener("click", () => {
-          playAudio(); // Play when the user clicks anywhere
+          playAudio();
         });
 
         document.addEventListener("visibilitychange", () => {
