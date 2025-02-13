@@ -215,25 +215,19 @@
         if (able !== "true") {
           window.location.href = "index.html";
         }
-
-        // Ensure video plays
-        const video = document.getElementById("bg-video");
-        video.play().catch((error) => {
-          console.log("Video autoplay blocked:", error);
-        });
-
-        document.addEventListener("click", () => {
-          video.play();
-        });
       });
 
       document.addEventListener("DOMContentLoaded", () => {
         const audio = document.getElementById("bg-music");
+        const video = document.getElementById("bg-video");
 
         const playAudio = () => {
           audio.muted = false; // Ensure it's not muted
           audio.play().catch((error) => {
             console.log("Autoplay blocked:", error);
+          });
+          video.play().catch((error) => {
+            console.log("Video autoplay blocked:", error);
           });
         };
 
